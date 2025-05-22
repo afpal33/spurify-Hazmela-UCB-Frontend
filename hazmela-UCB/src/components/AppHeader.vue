@@ -6,11 +6,9 @@
       </div>
       <div class="nav-links">
         <router-link to="/anuncios" class="nav-button">Anuncios</router-link>
-
         <template v-if="isAuthenticated">
           <button class="nav-button highlight" @click="handleLogout">Cerrar sesión</button>
         </template>
-
         <template v-else>
           <router-link to="/login" class="nav-button">Iniciar Sesión</router-link>
           <router-link to="/register" class="nav-button highlight">Registrarse</router-link>
@@ -21,19 +19,23 @@
 </template>
 
 <script setup>
-import { useAuth } from '@/stores/auth'
+import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import {computed} from "vue";
 
+const store = useStore()
 const router = useRouter()
-const { isAuthenticated, logout } = useAuth()
+
+const isAuthenticated = computed(() => store.getters['auth/isAuthenticated'])
 
 const handleLogout = () => {
-  logout()
+  store.dispatch('auth/logout')
   router.push('/login')
 }
 </script>
 
 <style scoped>
+/* Aquí el mismo CSS que ya tenías antes */
 .header {
   position: fixed;
   top: 0;
