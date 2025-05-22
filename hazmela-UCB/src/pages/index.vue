@@ -1,4 +1,5 @@
 <template>
+  <AppHeader />
   <HelloWorld />
 </template>
 
