@@ -11,9 +11,9 @@
       />
 
       <div class="text-center">
-        <div class="text-body-2 font-weight-light mb-n1">Welcome to</div>
-
-        <h1 class="text-h2 font-weight-bold">Vuetify</h1>
+        <div class="text-body-2 font-weight-light mb-n1">Bienvenido a</div>
+        <h1 class="text-h2 font-weight-bold">Hazmela</h1>
+        <div class="text-h5 font-weight-regular mt-4">Resuelve tus tareas con apoyo de gente que sabe</div>
       </div>
 
       <div class="py-4" />
@@ -23,8 +23,8 @@
           <v-card
             class="py-4"
             color="surface-variant"
-            image="https://cdn.vuetifyjs.com/docs/images/one/create/feature.png"
-            prepend-icon="mdi-rocket-launch-outline"
+            image=""
+            prepend-icon="mdi-school-outline"
             rounded="lg"
             variant="outlined"
           >
@@ -33,12 +33,12 @@
             </template>
 
             <template #title>
-              <h2 class="text-h5 font-weight-bold">Get started</h2>
+              <h2 class="text-h5 font-weight-bold">¡Comienza Ahora!</h2>
             </template>
 
             <template #subtitle>
               <div class="text-subtitle-1">
-                Replace this page by removing <v-kbd>{{ `<HelloWorld />` }}</v-kbd> in <v-kbd>pages/index.vue</v-kbd>.
+                Conecta con estudiantes y profesionales expertos para resolver tus dudas académicas
               </div>
             </template>
 
@@ -54,16 +54,12 @@
 
         <v-col cols="6">
           <v-card
-            append-icon="mdi-open-in-new"
             class="py-4"
             color="surface-variant"
-            href="https://vuetifyjs.com/"
-            prepend-icon="mdi-text-box-outline"
-            rel="noopener noreferrer"
+            prepend-icon="mdi-book-open-variant"
             rounded="lg"
-            subtitle="Learn about all things Vuetify in our documentation."
-            target="_blank"
-            title="Documentation"
+            subtitle="Encuentra ayuda en cualquier materia universitaria"
+            title="Todas las Materias"
             variant="text"
           >
             <v-overlay
@@ -78,16 +74,12 @@
 
         <v-col cols="6">
           <v-card
-            append-icon="mdi-open-in-new"
             class="py-4"
             color="surface-variant"
-            href="https://vuetifyjs.com/introduction/why-vuetify/#feature-guides"
-            prepend-icon="mdi-star-circle-outline"
-            rel="noopener noreferrer"
+            prepend-icon="mdi-clock-fast"
             rounded="lg"
-            subtitle="Explore available framework Features."
-            target="_blank"
-            title="Features"
+            subtitle="Respuestas rápidas cuando más las necesitas"
+            title="Ayuda 24/7"
             variant="text"
           >
             <v-overlay
@@ -102,16 +94,12 @@
 
         <v-col cols="6">
           <v-card
-            append-icon="mdi-open-in-new"
             class="py-4"
             color="surface-variant"
-            href="https://vuetifyjs.com/components/all"
-            prepend-icon="mdi-widgets-outline"
-            rel="noopener noreferrer"
+            prepend-icon="mdi-shield-check-outline"
             rounded="lg"
-            subtitle="Discover components in the API Explorer."
-            target="_blank"
-            title="Components"
+            subtitle="Expertos verificados para garantizar calidad"
+            title="Tutores Calificados"
             variant="text"
           >
             <v-overlay
@@ -126,16 +114,12 @@
 
         <v-col cols="6">
           <v-card
-            append-icon="mdi-open-in-new"
             class="py-4"
             color="surface-variant"
-            href="https://discord.vuetifyjs.com"
-            prepend-icon="mdi-account-group-outline"
-            rel="noopener noreferrer"
+            prepend-icon="mdi-cash-multiple"
             rounded="lg"
-            subtitle="Connect with Vuetify developers."
-            target="_blank"
-            title="Community"
+            subtitle="Precios accesibles para estudiantes"
+            title="Económico"
             variant="text"
           >
             <v-overlay

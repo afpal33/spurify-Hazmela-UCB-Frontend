@@ -1,7 +1,7 @@
 /**
  * plugins/vuetify.js
  *
- * Framework documentation: https://vuetifyjs.com`
+ * Vuetify configuration for Hazmela UCB
  */
 
 // Styles
@@ -10,10 +10,32 @@ import 'vuetify/styles'
 
 // Composables
 import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
-// https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
+// Define custom theme
+const hazmelaTheme = {
+  dark: false,
+  colors: {
+    primary: '#007BFF',         // Azul institucional (botones, acciones)
+    secondary: '#004591', // Azul gris neutro, elegante, sobrio y profesional
+    background: '#F8F9FA',      // Fondo general claro
+    surface: '#FFFFFF',         // Tarjetas
+    textPrimary: '#212529',     // Títulos, nombres
+    textSecondary: '#495057',   // Descripciones
+    border: '#DEE2E6',          // Líneas sutiles
+    danger: '#FF6B6B',          // Íconos de alerta / tiempo
+  },
+
+}
+
 export default createVuetify({
+  components,
+  directives,
   theme: {
-    defaultTheme: 'dark',
+    defaultTheme: 'light',
+    themes: {
+      light: hazmelaTheme,
+    },
   },
 })
