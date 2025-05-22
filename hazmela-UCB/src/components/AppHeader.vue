@@ -5,23 +5,31 @@
         <h1>Hazmela</h1>
       </div>
       <div class="nav-links">
-        <router-link to="/anuncios" class="nav-button">
-          Anuncios
-        </router-link>
-        <router-link to="/login" class="nav-button">
-          Iniciar Sesión
-        </router-link>
-        <router-link to="/register" class="nav-button highlight">
-          Registrarse
-        </router-link>
+        <router-link to="/anuncios" class="nav-button">Anuncios</router-link>
+
+        <template v-if="isAuthenticated">
+          <button class="nav-button highlight" @click="handleLogout">Cerrar sesión</button>
+        </template>
+
+        <template v-else>
+          <router-link to="/login" class="nav-button">Iniciar Sesión</router-link>
+          <router-link to="/register" class="nav-button highlight">Registrarse</router-link>
+        </template>
       </div>
     </nav>
   </header>
 </template>
 
-<script>
-export default {
-  name: 'AppHeader'
+<script setup>
+import { useAuth } from '@/stores/auth'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const { isAuthenticated, logout } = useAuth()
+
+const handleLogout = () => {
+  logout()
+  router.push('/login')
 }
 </script>
 
