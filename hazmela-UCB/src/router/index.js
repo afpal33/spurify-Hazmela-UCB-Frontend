@@ -4,12 +4,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/pages/Home.vue'
 import Login from '@/pages/Login.vue'
 import Register from '@/pages/Register.vue'
-import store from '@/store' // ✅ usamos Vuex directamente
+import { useAuthStore } from '@/stores/auth'
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
   { path: '/login', name: 'Login', component: Login },
   { path: '/register', name: 'Register', component: Register },
+  { path: '/anuncios', name: 'Anuncios', component: () => import('@/pages/Anuncios.vue') },
 ]
 
 const router = createRouter({
@@ -19,9 +20,9 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const publicPages = ['/login', '/register']
-  const isAuth = store.getters['auth/isAuthenticated']
-
-  if (!publicPages.includes(to.path) && !isAuth) {
+  const authStore = useAuthStore()
+  
+  if (!publicPages.includes(to.path) && !authStore.isAuthenticated) {
     return next('/login')
   }
 

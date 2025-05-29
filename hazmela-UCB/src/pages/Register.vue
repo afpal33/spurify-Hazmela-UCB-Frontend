@@ -76,10 +76,10 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
-const store = useStore()
+const authStore = useAuthStore()
 
 const step = ref(1)
 const loading = ref(false)
@@ -103,20 +103,26 @@ const form = reactive({
   career: '',
 })
 
-const handleNext = () => {
+const handleNext = async () => {
   if (step.value === 3) {
     loading.value = true
 
-    setTimeout(() => {
+    // Simulamos el registro por ahora, pero puedes implementar la API real
+    setTimeout(async () => {
       loading.value = false
 
-      store.dispatch('auth/login', {
+      // Usar login automático después del registro
+      const result = await authStore.login({
         email: form.email,
-        name: `${form.firstName} ${form.lastName}`,
-        token: 'fake-jwt-token',
+        password: form.password
       })
 
-      router.push('/')
+      if (result.success) {
+        router.push('/')
+      } else {
+        // Si falla el auto-login, redirigir a login manual
+        router.push('/login')
+      }
     }, 2000)
   } else {
     step.value++

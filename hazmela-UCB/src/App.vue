@@ -11,12 +11,12 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import AppHeader from './components/AppHeader.vue'
-import { useStore } from 'vuex'
+import { useAuthStore } from '@/stores/auth'
 
-const store = useStore()
+const authStore = useAuthStore()
 const route = useRoute()
 
 const showHeader = computed(() => {
-  return store.getters['auth/isAuthenticated'] && !['/login', '/register'].includes(route.path)
+  return authStore.isAuthenticated && !['/login', '/register'].includes(route.path)
 })
 </script>

@@ -44,9 +44,25 @@ export default defineConfig({
       '.tsx',
       '.vue',
     ],
-  },
-  server: {
+  },  server: {
     port: 3000,
+    https: false, // Cambia a true si necesitas HTTPS en desarrollo
+    proxy: {
+      // Proxy para la API de autenticación
+      '/api/ms-auth': {
+        target: 'https://localhost:8081',
+        changeOrigin: true,
+        secure: false, // Permite certificados autofirmados
+        rewrite: (path) => path.replace(/^\/api/, '')
+      },
+      // Proxy para la API de anuncios
+      '/api/ms-anuncios': {
+        target: 'https://localhost:8081',
+        changeOrigin: true,
+        secure: false, // Permite certificados autofirmados
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   },
   css: {
     preprocessorOptions: {

@@ -4,16 +4,19 @@
  * Bootstraps Vuetify and other plugins then mounts the App`
  */
 
-// main.js
-
 import { createApp } from 'vue'
 import App from './App.vue'
-import store from './store'
+import pinia from './stores'
+import { useAuthStore } from './stores/auth'
 import { registerPlugins } from '@/plugins'
 
 const app = createApp(App)
 
-app.use(store) // ✅ habilitar Vuex
+app.use(pinia) // ✅ habilitar Pinia
 registerPlugins(app)
+
+// Inicializar el store de autenticación
+const authStore = useAuthStore()
+authStore.initialize()
 
 app.mount('#app')

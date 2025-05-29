@@ -19,17 +19,17 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex'
+import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
-import {computed} from "vue";
+import { computed } from "vue"
 
-const store = useStore()
+const authStore = useAuthStore()
 const router = useRouter()
 
-const isAuthenticated = computed(() => store.getters['auth/isAuthenticated'])
+const isAuthenticated = computed(() => authStore.isAuthenticated)
 
 const handleLogout = () => {
-  store.dispatch('auth/logout')
+  authStore.logout()
   router.push('/login')
 }
 </script>

@@ -7,6 +7,17 @@
           <h2 class="text-h5 font-weight-bold mb-1">Iniciar Sesión en Hazmela</h2>
           <p class="text-body-2 mb-6">Resuelve tus tareas con ayuda de expertos</p>
 
+          <!-- Mostrar error si existe -->
+          <v-alert
+            v-if="authStore.error"
+            type="error"
+            class="mb-4"
+            closable
+            @click:close="authStore.clearError()"
+          >
+            {{ authStore.error }}
+          </v-alert>
+
           <v-form @submit.prevent="handleLogin">
             <v-text-field
               v-model="email"
@@ -16,6 +27,8 @@
               variant="outlined"
               density="comfortable"
               class="mb-4"
+              :disabled="authStore.isLoading"
+              :error-messages="emailErrors"
               required
             />
             <v-text-field
@@ -26,10 +39,20 @@
               variant="outlined"
               density="comfortable"
               class="mb-6"
+              :disabled="authStore.isLoading"
+              :error-messages="passwordErrors"
               required
             />
-            <v-btn type="submit" color="primary" size="large" rounded="lg" block>
-              Iniciar Sesión
+            <v-btn 
+              type="submit" 
+              color="primary" 
+              size="large" 
+              rounded="lg" 
+              block
+              :loading="authStore.isLoading"
+              :disabled="!isFormValid"
+            >
+              {{ authStore.isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión' }}
             </v-btn>
           </v-form>
 
@@ -48,30 +71,33 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+import { useAuthStore } from '@/stores/auth'
+import { useLoginForm } from '@/composables/useLoginForm'
 
-const email = ref('')
-const password = ref('')
 const router = useRouter()
-const store = useStore()
+const authStore = useAuthStore()
+const { 
+  email, 
+  password, 
+  emailErrors, 
+  passwordErrors, 
+  isFormValid, 
+  clearForm, 
+  getCredentials 
+} = useLoginForm()
 
-const handleLogin = () => {
-  if (email.value && password.value) {
-    const user = {
-      name: email.value.split('@')[0],
-      email: email.value
-    }
-
-    store.dispatch('auth/login', {
-      user,
-      token: 'fake-jwt-token'
-    })
-
-    router.push('/')
-  } else {
-    alert('Por favor, completa todos los campos')
+const handleLogin = async () => {
+  if (!isFormValid.value) {
+    return
   }
+
+  const result = await authStore.login(getCredentials())
+
+  if (result.success) {
+    clearForm()
+    router.push('/')
+  }
+  // Los errores se muestran automáticamente desde el store
 }
 </script>
